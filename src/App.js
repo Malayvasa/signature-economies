@@ -1,11 +1,19 @@
+import { useState } from 'react';
 import image1 from './images/image1.png';
+import Modal from './components/modal';
 
 function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+
+
   return (
     <div className="mx-auto pb-32 bg-white">
       
       <div className="bg-white z-40 fixed -top-12 h-48 w-full blur-xl" ></div>
       <div className="bg-white z-40 fixed -bottom-12 h-48 w-full blur-xl"></div>
+
+     {!modalVisible && <div onClick={()=>{setModalVisible(!modalVisible)}} className='fixed z-50 bottom-8 right-8 border-2 rounded-md p-4 px-12 hover:border-black transition-all font-serif'>Mint 1/1 NFTs</div>}
+      {modalVisible && <div className='flex justify-center z-50 fixed top-0 left-0 bg-gray-500/30 backdrop-blur-md w-screen h-screen'><Modal setModalVisible = {setModalVisible}/></div>}
 
       <div className="flex flex-col w-screen h-screen items-center ">
         <div className="flex md:text-8xl text-4xl flex-grow font-redaction text-gray-700 self-center">
@@ -31,7 +39,7 @@ function App() {
       </div>
 
       <div className="flex flex-col py-16 items-center justify-center">
-        <div className="relative group z-50 ">
+        <div className="relative group z-40 ">
           <img
             src={image1}
             className="group-hover:bg-white  group-hover:shadow-lg rounded-lg transition-all p-8"
