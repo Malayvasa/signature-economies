@@ -8,3 +8,9 @@
     font-family: "Redaction";
     src: url("../public/fonts/Redaction50-Italic.otf");
   }
+
+  a {
+    color: #233447;
+    text-decoration: underline;
+    font-weight: 700;
+}
