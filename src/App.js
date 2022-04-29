@@ -1,7 +1,8 @@
 import { Fragment, useState } from 'react';
 import image1 from './images/image1.png';
 import signature_derrida from './images/signature_derrida.png';
-import Modal from './components/modal';
+import SliderModal from './components/slider-modal';
+import HighlightModal from './components/highlight-modal';
 import HighlightPop from 'react-highlight-pop';
 
 function getSelectedText() {
@@ -26,39 +27,44 @@ function getSelectedText() {
 }
 
 function App() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [sliderModalVisible, setSliderModalVisible] = useState(false);
+  const [highlightModalVisible, setHighlightModalVisible] = useState(false);
+  const [selectedText, setSelectedText] = useState('');
 
   return (
-    <div className="mx-auto pb-32 bg-white">
+    <div className="mx-auto pb-32 bg-white selection:bg-green-300 selection:text-green-900">
       <div className="bg-white z-40 fixed -top-12 h-48 w-full blur-xl"></div>
       <div className="bg-white z-40 fixed -bottom-12 h-48 w-full blur-xl"></div>
 
-      {!modalVisible && (
+      {!sliderModalVisible && (
         <div
           onClick={() => {
-            setModalVisible(!modalVisible);
+            setSliderModalVisible(true);
           }}
           className="fixed z-50 bottom-8 right-8 border-2 rounded-md p-4 px-12 hover:border-black transition-all font-serif"
         >
           Mint 1/1 NFTs
         </div>
       )}
-      {modalVisible && (
+      {sliderModalVisible && (
         <div className="flex justify-center z-50 fixed top-0 left-0 bg-gray-500/30 backdrop-blur-md w-screen h-screen">
-          <Modal setModalVisible={setModalVisible} />
+          <SliderModal setModalVisible={setSliderModalVisible} />
         </div>
       )}
+      {highlightModalVisible && (<div className="flex justify-center z-[100] fixed top-0 left-0 bg-gray-500/30 backdrop-blur-md w-screen h-screen">
+        <HighlightModal setModalVisible={setHighlightModalVisible} selectedText={selectedText} />
+      </div>)}
 
       <HighlightPop
         popoverItems={(itemClass) => (
-          <Fragment>
+          <div>
             <span
               className={itemClass}
-              onClick={() => alert(window.getSelection())}
+              onClick={() => {setSelectedText(window.getSelection().toString()); setHighlightModalVisible(true);}}
             >
               🍀 Mint
             </span>
-          </Fragment>
+          </div>
         )}
       >
 
@@ -96,7 +102,7 @@ function App() {
             className="group-hover:bg-white  group-hover:shadow-lg rounded-lg transition-all p-8"
             alt="logo"
           />
-          <div className=" select-none w-48 absolute right-0 left-0 z-10 rounded-lg -bottom-4 mx-auto text-transparent group-hover:text-white font-redaction text-xl shadow-none group-hover:shadow-lg bg-transparent text-center h-12 flex items-center justify-center group-hover:bg-indigo-400 transition-all">
+          <div className=" select-none w-48 absolute right-0 left-0 z-10 rounded-lg -bottom-4 mx-auto text-transparent group-hover:text-green-900 border-green-900 group-hover:border font-redaction text-xl shadow-none group-hover:shadow-lg bg-transparent text-center h-12 flex items-center justify-center group-hover:bg-green-300 transition-all">
             Mint
           </div>
         </div>
@@ -543,7 +549,7 @@ function App() {
             className="group-hover:bg-white  group-hover:shadow-lg rounded-lg transition-all p-8"
             alt="Signature_Derrida"
           />
-          <div className=" select-none w-48 absolute right-0 left-0 z-10 rounded-lg -bottom-4 mx-auto text-transparent group-hover:text-white font-redaction text-xl shadow-none group-hover:shadow-lg bg-transparent text-center h-12 flex items-center justify-center group-hover:bg-indigo-400 transition-all">
+          <div className=" select-none w-48 absolute right-0 left-0 z-10 rounded-lg -bottom-4 mx-auto text-transparent group-hover:text-green-900 border-green-900 group-hover:border font-redaction text-xl shadow-none group-hover:shadow-lg bg-transparent text-center h-12 flex items-center justify-center group-hover:bg-green-300 transition-all">
             Mint
           </div>
         </div>

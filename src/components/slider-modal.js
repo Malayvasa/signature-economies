@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Modal({ setModalVisible }) {
+function SliderModal({ setModalVisible }) {
   const [sliderValue, setSliderValue] = useState(0);
 
   return (
@@ -37,4 +37,4 @@ function Modal({ setModalVisible }) {
   );
 }
 
-export default Modal;
+export default SliderModal;
